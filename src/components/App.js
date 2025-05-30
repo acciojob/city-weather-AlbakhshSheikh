@@ -7,12 +7,12 @@ function App() {
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useState(null);
 
-  const search = async (e) => {
+const search = async (e) => {
     if (e.key === "Enter") {
-      const response = await axios.get(
+      fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${API_KEY}`
-      );
-      setWeather(response.data);
+      ).then((res)=>res.json()).then((resData)=>setWeather(resData))
+      
       setQuery("");
     }
   };
